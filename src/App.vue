@@ -4,8 +4,8 @@ import HelloWorld from './components/HelloWorld.vue'
 
 console.log(import.meta.env.VITE_APP_URL);
 
-export default{
-  components:{
+export default {
+  components: {
     RouterLink, RouterView, HelloWorld
   }
 }
@@ -16,7 +16,8 @@ export default{
     <div class="container">
       <RouterLink to="/"><span class="navbar-brand text-white">吃迷 CHIC MI</span></RouterLink>
       <!-- <a class="navbar-brand text-white" href="#">吃迷 CHIC MI</a> -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -33,6 +34,6 @@ export default{
 
   <!-- 底部列 -->
   <footer class="w-100 py-3 text-center text-bg-secondary text-light">
-    <div>© 2023 Copyright: Brunch</div>
+    <div>© 2023 Copyright: 吃迷 CHIC MI</div>
   </footer>
 </template>
