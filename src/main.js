@@ -15,4 +15,6 @@ app.use(router);
 
 app.mount("#app");
 
+// bootstrap-icons
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.js";

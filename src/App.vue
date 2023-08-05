@@ -1,12 +1,13 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import WebFooter from './components/WebFooter.vue'
 
 console.log(import.meta.env.VITE_APP_URL);
 
 export default {
   components: {
-    RouterLink, RouterView, HelloWorld
+    RouterLink, RouterView, HelloWorld, WebFooter
   }
 }
 </script>
@@ -32,8 +33,5 @@ export default {
 
   <router-view />
 
-  <!-- 底部列 -->
-  <footer class="w-100 py-3 text-center text-bg-secondary text-light">
-    <div>© 2023 Copyright: 吃迷 CHIC MI</div>
-  </footer>
+  <WebFooter />
 </template>
