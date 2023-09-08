@@ -1,9 +1,10 @@
 <script>
+import banner from '/img/banner.jpg'
 export default {
   data() {
     return {
       text: "首頁",
-      imgUrl: '/src/assets/img/banner.jpg'
+      imgUrl: banner
     }
   }
 }
@@ -38,7 +39,7 @@ export default {
             </div>
             <div class="col d-flex justify-content-center align-items-center">
               <div class="room position-relative rounded-circle w-100 overflow-hidden">
-                <img src="../assets/img/room.jpg" alt="室內環境" class="position-absolute top-0 start-0 w-100 h-100">
+                <img src="/src/assets/img/room.jpg" alt="室內環境" class="position-absolute top-0 start-0 w-100 h-100">
               </div>
             </div>
           </div>
