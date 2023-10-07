@@ -8,7 +8,15 @@ import "./assets/all.scss";
 import App from "./App.vue";
 import router from "./router";
 
-const app = createApp(App);
+/* import the fontawesome core */
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faUserSecret, faUtensils } from "@fortawesome/free-solid-svg-icons"; // 所有要嵌入的 icon 都要加在這裡
+
+/* add icons to the library */
+library.add(faUserSecret, faUtensils); // 所有要嵌入的 icon 都要加在這裡
+
+const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 
 app.use(createPinia());
 app.use(router);
