@@ -1,9 +1,49 @@
 <script>
+import brandBg from '@/assets/img/brand_bg.jpg'
+import waiterBg from '@/assets/img/waiter.jpg'
+import glassBg from '@/assets/img/glassBg.jpg'
+
 export default {
   data() {
     return {
       text: "About頁",
-      imgUrl: "/src/assets/img/banner.jpg",
+      brandImgUrl: brandBg,
+      waiterBgUrl: waiterBg,
+      glassBgUrl: glassBg,
+      titleBg: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      // 風格特色
+      features: [
+        {
+          id: 1,
+          icon: "bell-concierge",
+          text: "美食饗宴"
+        },
+        {
+          id: 2,
+          icon: "building-wheat",
+          text: "清爽環境"
+        },
+        {
+          id: 3,
+          icon: "hand-holding-heart",
+          text: "貼心服務"
+        },
+        {
+          id: 4,
+          icon: "mountain-sun",
+          text: "景色優美"
+        },
+        {
+          id: 5,
+          icon: "money-bill-trend-up",
+          text: "物超所值"
+        },
+        {
+          id: 6,
+          icon: "champagne-glasses",
+          text: "尊爵享受"
+        },
+      ]
     };
   },
 };
@@ -12,10 +52,16 @@ export default {
 <template>
   <section>
     <!-- 圖片 -->
-    <div class="bgImage"></div>
+    <!-- <div class="bgImage"></div> -->
+    <div class="position-relative" style="height: 200px">
+      <div class="titleArea" :style="{ 'background-image': 'url(' + titleBg + ')' }"></div>
+      <div class="fs-2 text-white position-absolute translate-middle start-50 top-50">
+        品牌故事
+      </div>
+    </div>
     <div class="container py-5">
-      <div class="row">
-        <div class="col-6">
+      <div class="row d-flex align-items-center">
+        <div class="col-12 col-md-6 pe-md-5 pe-0">
           <h2 class="brLineAfter position-relative d-inline-block">品牌背景</h2>
           <div class="pt-3">
             <p>
@@ -23,17 +69,21 @@ export default {
             </p>
           </div>
         </div>
-        <div class="col-6">
-          <img src="" alt="" />
+        <div class="col-12 col-md-6 px-1">
+          <div class="rounded-3 overflow-hidden p-0 shadow-lg">
+            <img :src="brandImgUrl" alt="" class="w-100">
+          </div>
         </div>
       </div>
     </div>
     <div class="container py-5">
-      <div class="row">
-        <div class="col-6">
-          <img src="" alt="" />
+      <div class="row d-flex align-items-center flex-md-row flex-column-reverse">
+        <div class="col-12 col-md-6 px-1">
+          <div class="rounded-3 overflow-hidden p-0 shadow-lg">
+            <img :src="waiterBgUrl" alt="" class="w-100">
+          </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6 ps-md-4 ps-0">
           <h2 class="brLineAfter position-relative d-inline-block">用心服務</h2>
           <div class="pt-3">
             <p>
@@ -48,52 +98,19 @@ export default {
         <div class="col-12 text-center">
           <h2 class="brLineAfter position-relative d-inline-block">風格特色</h2>
           <div class="pt-3 d-flex flex-wrap">
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
-            </div>
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
-            </div>
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
-            </div>
-
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
-            </div>
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
-            </div>
-            <div class="py-5 feature-card col-4">
-              <font-awesome-icon
-                icon="fa-solid fa-utensils"
-                class="fs-2 text-primary"
-              />
-              <div class="fs-5 pt-2">美食饗宴</div>
+            <div class="py-3 col-12 col-sm-6 col-md-4 feature-card-outer" v-for="item in features" :key="item.id">
+              <div class="p-3 m-3 h-100 feature-card d-flex flex-column justify-content-center">
+                <font-awesome-icon :icon="['fas', item.icon]" class="text-primary" style="font-size: 72px;" />
+                <div class="fs-4 pt-3" style="letter-spacing: 2px;">{{ item.text }}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="position-relative">
+      <div class="bgImage" :style="'background-image:url(' + glassBgUrl + ')'"></div>
+      <div class="text-white position-absolute translate-middlenp top-50 start-50">Slogan</div>
     </div>
   </section>
 </template>
@@ -103,6 +120,7 @@ export default {
 
 .brLineAfter {
   padding-bottom: 0.5rem;
+
   &::after {
     content: "";
     position: absolute;
@@ -115,16 +133,29 @@ export default {
   }
 }
 
+
+.titleArea {
+  height: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.2);
+}
+
 .bgImage {
   height: 50vh;
   // background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  background-image: url(https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80);
+  filter: brightness(0.2);
 }
 
-.feature-card {
-  background: $gray-200;
+.feature-card-outer {
+  height: 300px;
+}
+
+.feature-card:hover {
+  background: $gray-100;
   border-radius: 8px;
 }
 </style>
