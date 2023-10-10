@@ -1,7 +1,8 @@
 <script>
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
-
+import { mapActions, mapState } from 'pinia'
+import { cartStore } from '../../stores/counter'
 
 export default {
   data() {
@@ -49,7 +50,7 @@ export default {
       });
       this.categories = categoriesArr;
     },
-    // 按下按鈕後，只顯示該分類產品
+    // 按下分類按鈕後，只顯示該分類產品
     getCateProducts(category) {
       console.log(category)
       if (category) {
@@ -66,7 +67,25 @@ export default {
         // 全部
         this.cateProducts = this.products;
       }
+    },
+
+    // 加入購物車
+    ...mapActions(cartStore, ['addToCart']),
+
+    // 是否有此產品在購物車了
+    hasProduct(id) {
+      let bool = false;
+      this.productList.forEach((item) => {
+        if (item.id === id) {
+          console.warn(id)
+          bool = true;
+        }
+      });
+      return bool;
     }
+  },
+  computed: {
+    ...mapState(cartStore, ['productList'])
   },
   mounted() {
 
@@ -119,7 +138,12 @@ export default {
                 </RouterLink>
               </div>
               <div class="col col-md-6 ps-0 ps-md-1 pt-1 pt-md-0">
-                <button type="button" class="btn btn-primary w-100 px-1">加入購物車</button>
+                <template v-if="hasProduct(product.id)">
+                  <button type="button" class="btn btn-secondary w-100 px-1" disabled>已加入購物車</button>
+                </template>
+                <template v-else>
+                  <button type="button" class="btn btn-primary w-100 px-1" @click="addToCart(product)">加入購物車</button>
+                </template>
               </div>
             </div>
           </div>

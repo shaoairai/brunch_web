@@ -46,7 +46,7 @@ export default {
                 <RouterLink to="about" class="footer-nav">品牌故事</RouterLink>
               </div>
               <div class="pb-1">
-                <RouterLink to="products" class="footer-nav">菜單介紹</RouterLink>
+                <RouterLink to="products" class="footer-nav">線上點餐</RouterLink>
               </div>
               <div class="pb-1">
                 <RouterLink to="contact" class="footer-nav">聯絡我們</RouterLink>
