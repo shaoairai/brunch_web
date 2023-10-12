@@ -4,6 +4,8 @@ import { defineStore } from "pinia";
 export const cartStore = defineStore("cart", {
   state: () => {
     return {
+      // 所有產品
+      products: {},
       // 購物車列表
       productList: [],
       // 運費
@@ -13,6 +15,11 @@ export const cartStore = defineStore("cart", {
     };
   },
   actions: {
+    saveProducts(products) {
+      this.products = products;
+      console.log(this.products);
+    },
+
     // 如果 localStorage 有資料，就存放
     // 3. 直接可執行
     setProductList(storedCart) {

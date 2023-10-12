@@ -8,8 +8,6 @@ export default {
   data() {
     return {
       token: "",
-      // 所有產品
-      products: {},
       // 分類
       categories: [],
       // 分類產品
@@ -32,10 +30,13 @@ export default {
       }
       axios(conf).then((res) => {
         console.log(res);
-        this.products = res.data.products;
+        // 存放所有產品
+        const saveData = cartStore();
+        saveData.saveProducts(res.data.products);
+
         // 篩選狀態為全部
         this.cateProducts = res.data.products;
-        console.log(this.products);
+        // console.log(this.products);
         this.getCategories();
       }).catch((err) => {
         console.log(err.response);
@@ -69,6 +70,7 @@ export default {
       }
     },
 
+    // 存到 pinia
     // 加入購物車
     ...mapActions(cartStore, ['addToCart']),
 
@@ -85,7 +87,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(cartStore, ['productList'])
+    ...mapState(cartStore, ['productList','products'])
   },
   mounted() {
 
