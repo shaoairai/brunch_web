@@ -1,7 +1,7 @@
 <script>
 import banner from "/img/banner.jpg";
 import axios from "axios";
-import { mapActions, mapState } from "pinia";
+import { mapState } from "pinia";
 import { cartStore } from "../../stores/counter";
 
 export default {
@@ -17,9 +17,8 @@ export default {
     getProducts() {
       const conf = {
         method: "GET",
-        url: `${import.meta.env.VITE_APP_URL}v2/api/${
-          import.meta.env.VITE_APP_PATH
-        }/admin/products/all`,
+        url: `${import.meta.env.VITE_APP_URL}v2/api/${import.meta.env.VITE_APP_PATH
+          }/admin/products/all`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `${this.token}`,
@@ -64,18 +63,10 @@ export default {
   <div class="content position-relative">
     <!-- banner 背景 -->
     <section class="banner-outer">
-      <div
-        class="banner-bg w-100"
-        :style="{ backgroundImage: 'url(' + imgUrl + ')' }"
-      ></div>
-      <div
-        class="banner position-absolute top-0 left-0 w-100"
-        style="height: calc(100vh - 66px)"
-      >
-        <div
-          class="banner-text row g-0 w-100 align-items-center container my-0 mx-auto"
-        >
-          <div class="col-6 text-white d-flex flex-column">
+      <div class="banner-bg w-100" :style="{ backgroundImage: 'url(' + imgUrl + ')' }"></div>
+      <div class="banner position-absolute top-0 left-0 w-100">
+        <div class="banner-text row g-0 w-100 align-items-center container my-0 mx-auto">
+          <div class="col-12 px-3 col-md-6 px-md-0 text-white d-flex flex-column">
             <h2 class="fs-1">吃迷 CHIC MI</h2>
             <h3 class="fs-4">The Best Brunch Ever</h3>
           </div>
@@ -102,14 +93,8 @@ export default {
               </div>
             </div>
             <div class="col d-flex justify-content-center align-items-center">
-              <div
-                class="room position-relative rounded-circle w-100 overflow-hidden"
-              >
-                <img
-                  src="/src/assets/img/room.jpg"
-                  alt="室內環境"
-                  class="position-absolute top-0 start-0 w-100 h-100"
-                />
+              <div class="room position-relative rounded-circle w-100 overflow-hidden">
+                <img src="/src/assets/img/room.jpg" alt="室內環境" class="position-absolute top-0 start-0 w-100 h-100" />
               </div>
             </div>
           </div>
@@ -120,11 +105,12 @@ export default {
     <section>
       <div class="sloganArea position-relative">
         <div class="sloganBg"></div>
-        <h3
-          class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center text-white fs-2"
-        >
-          癡迷美食，享受無比的舌尖饗宴！
-        </h3>
+        <div class="w-100 h-100 text-center">
+          <h3 class="position-absolute translate-middle top-50 start-50 text-white fs-2">
+            <span class="lh-base" style="white-space: nowrap;">癡迷美食，</span>
+            <span class="lh-base" style="white-space: nowrap;">享受無比的舌尖饗宴！</span>
+          </h3>
+        </div>
       </div>
     </section>
     <!-- 精選熱銷 -->
@@ -132,14 +118,10 @@ export default {
       <div class="py-5 container">
         <h3 class="text-start py-5 text-center">精選熱銷 | Featured</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <template 
-              v-for="(item, key, index) in products"
-              :key="item.id">
-            <div
-              class="col" v-if="index > 0 && index < 7"
-            >
+          <template v-for="(item, key, index) in products" :key="item.id">
+            <div class="col" v-if="index > 0 && index < 7">
               <div class="card h-100 border-0">
-                <img :src="item.imageUrl" class="rounded-3" alt="..." />
+                <img :src="item.imageUrl" class="rounded-3" alt="..." style="height: 300px; object-fit: cover;" />
                 <div class="d-flex justify-content-between pt-2">
                   <h5>{{ item.title }}</h5>
                   <div>NT${{ item.price }}</div>
@@ -166,26 +148,17 @@ export default {
     <section>
       <div class="row g-0">
         <div class="col-12 col-md-8" style="height: 450px">
-          <iframe
-            class="w-100 h-100"
+          <iframe class="w-100 h-100"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.449189215327!2d121.60666607507892!3d23.97991017992707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34689fc13b9d5f11%3A0x6eb61ff6cedce033!2zOTcw6Iqx6JOu57ij6Iqx6JOu5biC5LiJ5rCR6KGXNTLomZ8!5e0!3m2!1szh-TW!2stw!4v1691218917951!5m2!1szh-TW!2stw"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div
-          class="col-12 col-md-4 px-3 py-5 py-md-0 d-flex justify-content-center align-items-center bg-primary"
-        >
+        <div class="col-12 col-md-4 px-3 py-5 py-md-0 d-flex justify-content-center align-items-center bg-primary">
           <div class="d-flex flex-column text-white">
             <div class="pb-1">
-              <i class="bi bi-geo-alt-fill pe-2"></i
-              >地址：970花蓮縣花蓮市三民街52號
+              <i class="bi bi-geo-alt-fill pe-2"></i>地址：970花蓮縣花蓮市三民街52號
             </div>
             <div class="pb-1">
-              <i class="bi bi-calendar-week-fill pe-2"></i
-              >營業時間：11:00~20:00(週一公休)
+              <i class="bi bi-calendar-week-fill pe-2"></i>營業時間：11:00~20:00(週一公休)
             </div>
             <div class="pb-1">
               <i class="bi bi-telephone-fill pe-2"></i>聯絡電話：(03)831-1131
@@ -209,9 +182,11 @@ export default {
   background-size: cover;
 }
 
+.banner,
 .banner-text {
   height: calc(100vh - 66px);
 }
+
 
 /* 正圓遮罩 */
 .circle-mask {
@@ -237,5 +212,14 @@ export default {
   background-size: cover;
   background-attachment: fixed;
   filter: brightness(0.2);
+}
+
+@media screen and (max-width: 768px) {
+
+  .banner,
+  .banner-text,
+  .banner-bg {
+    height: calc(50vh - 66px);
+  }
 }
 </style>

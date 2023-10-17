@@ -110,7 +110,7 @@ export default {
     </div>
     <div class="position-relative">
       <div class="bgImage" :style="'background-image:url(' + glassBgUrl + ')'"></div>
-      <div class="text-white position-absolute translate-middlenp top-50 start-50">Slogan</div>
+      <div class="text-white fs-2 position-absolute translate-middle top-50 start-50">吃迷，讓你一吃就迷戀的生活饗宴</div>
     </div>
   </section>
 </template>
@@ -143,8 +143,8 @@ export default {
 }
 
 .bgImage {
-  height: 50vh;
-  // background-attachment: fixed;
+  height: 30vh;
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   filter: brightness(0.2);

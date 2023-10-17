@@ -52,7 +52,18 @@ export default {
     </div>
   </nav>
 
-  <RouterView />
+  <RouterView style="padding-top: 46px;" />
 
   <WebFooter />
 </template>
+
+<style scoped>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  box-shadow: 0px 2px 2px #0000004f;
+}
+</style>
