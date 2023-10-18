@@ -4,6 +4,8 @@ import { mapState, mapActions } from 'pinia';
 import { cartStore } from '../../stores/counter';
 import axios from 'axios';
 
+import { getTokenFromCookie } from '../../utils/token/getToken'
+
 export default {
   data() {
     return {
@@ -55,6 +57,8 @@ export default {
   },
   mounted() {
     console.log("#router", this.$route.params.id)
+
+    // console.warn(getTokenFromCookie());
 
     // 從 cookie 取出 token
     const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));

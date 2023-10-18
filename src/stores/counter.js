@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+// import axios from 'axios'
 
 export const cartStore = defineStore("cart", {
   state: () => {
@@ -15,6 +16,26 @@ export const cartStore = defineStore("cart", {
     };
   },
   actions: {
+    // // 取得產品列表
+    // getProducts() {
+    //   const conf = {
+    //     method: 'GET',
+    //     url: `${import.meta.env.VITE_APP_URL}v2/api/${import.meta.env.VITE_APP_PATH}/admin/products/all`,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `${this.token}`,
+    //     }
+    //   }
+    //   axios(conf).then((res) => {
+    //     console.log(res);
+    //     // 存放所有產品
+    //     const saveData = cartStore();
+    //     saveData.saveProducts(res.data.products);
+    //   }).catch((err) => {
+    //     console.log(err.response);
+    //   })
+    // },
+
     saveProducts(products) {
       this.products = products;
       console.log(this.products);
