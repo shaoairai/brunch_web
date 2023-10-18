@@ -1,8 +1,9 @@
 <script>
 import banner from "/img/banner.jpg";
 import axios from "axios";
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { cartStore } from "../../stores/counter";
+import { RouterLink } from "vue-router";
 
 export default {
   data() {
@@ -35,9 +36,28 @@ export default {
           console.log(err.response);
         });
     },
+
+    // 存到 pinia
+    // 加入購物車
+    ...mapActions(cartStore, ['addToCart']),
+
+    // 是否有此產品在購物車了
+    hasProduct(id) {
+      let bool = false;
+      this.productList.forEach((item) => {
+        if (item.id === id) {
+          console.warn(id)
+          bool = true;
+        }
+      });
+      return bool;
+    }
   },
   computed: {
-    ...mapState(cartStore, ["products"]),
+    ...mapState(cartStore, ['productList', "products"]),
+  },
+  components: {
+    RouterLink
   },
   mounted() {
     // 從 cookie 取出 token
@@ -128,14 +148,19 @@ export default {
                 </div>
                 <div class="row d-flex flex-column flex-md-row g-0">
                   <div class="col col-md-6 pe-0 pe-md-1">
-                    <button type="button" class="btn btn-primary w-100">
-                      查看內容
-                    </button>
+                    <RouterLink :to="'/product/' + item.id">
+                      <button type="button" class="btn btn-primary w-100">
+                        查看內容
+                      </button>
+                    </RouterLink>
                   </div>
                   <div class="col col-md-6 ps-0 ps-md-1 pt-1 pt-md-0">
-                    <button type="button" class="btn btn-primary w-100 px-1">
-                      加入購物車
-                    </button>
+                    <template v-if="hasProduct(item.id)">
+                      <button type="button" class="btn btn-secondary w-100 px-1" disabled>已加入購物車</button>
+                    </template>
+                    <template v-else>
+                      <button type="button" class="btn btn-primary w-100 px-1" @click="addToCart(item)">加入購物車</button>
+                    </template>
                   </div>
                 </div>
               </div>

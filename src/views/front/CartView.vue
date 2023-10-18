@@ -58,16 +58,16 @@ export default {
                 <div class="col d-flex justify-content-center">{{ item.name }}</div>
                 <div class="col d-flex justify-content-center">NT$ {{ item.price }}</div>
                 <div class="col d-flex justify-content-center align-items-center">
-                  <div @click="minusProduct(item)">
+                  <div @click="minusProduct(item)" class="cursor-pointer">
                     <i class="bi bi-dash-circle-fill text-primary fs-4"></i>
                   </div>
                   <input type="number" class="input-number mx-2" v-model="item.number" readonly />
-                  <div @click="plusProduct(item)">
+                  <div @click="plusProduct(item)" class="cursor-pointer">
                     <i class="bi bi-plus-circle-fill text-primary fs-4"></i>
                   </div>
                 </div>
                 <div class="col d-flex justify-content-center">NT$ {{ item.price * item.number }}</div>
-                <div class="col d-flex justify-content-center" @click="delProduct(item)">X</div>
+                <div class="col d-flex justify-content-center cursor-pointer" @click="delProduct(item)">X</div>
               </div>
               <div class="section-line" v-if="index < productList.length - 1"></div>
             </template>
@@ -100,6 +100,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/all.scss";
+
+.cursor-pointer {
+  cursor: pointer;
+}
 
 .section-line {
   border-bottom: 2px solid $gray-300;
