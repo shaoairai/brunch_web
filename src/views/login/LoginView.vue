@@ -45,13 +45,13 @@ export default {
 
 <template>
   <div>
-    <form>
+    <!-- <form>
       <div>帳號：</div>
       <input type="text" id="account" v-model="username" />
       <div>密碼：</div>
       <input type="password" id="password" v-model="password" />
       <button type="button" class="btn btn-primary" @click="login()">登入</button>
-    </form>
+    </form> -->
   </div>
 </template>
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import { mapActions, mapState } from "pinia";
 import { cartStore } from "../../stores/counter";
 import { RouterLink } from "vue-router";
+import { login } from "../../utils/token/getToken";
 
 export default {
   data() {
@@ -59,13 +60,19 @@ export default {
   components: {
     RouterLink
   },
-  mounted() {
+  async mounted() {
+
     // 從 cookie 取出 token
     const tokenCookie = document.cookie
       .split(";")
       .map((cookie) => cookie.trim())
       .find((cookie) => cookie.startsWith("token="));
     const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+
+    if (!token) {
+      // 登入
+      await login();
+    }
 
     // 沒 token 就踢出去
     if (!token) {
@@ -156,7 +163,7 @@ export default {
                   </div>
                   <div class="col col-md-6 ps-0 ps-md-1 pt-1 pt-md-0">
                     <template v-if="hasProduct(item.id)">
-                      <button type="button" class="btn btn-secondary w-100 px-1" disabled>已加入購物車</button>
+                      <button type="button" class="btn btn-secondary w-100 px-1" disabled>已在購物車</button>
                     </template>
                     <template v-else>
                       <button type="button" class="btn btn-primary w-100 px-1" @click="addToCart(item)">加入購物車</button>
