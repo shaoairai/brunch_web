@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router';
 import { mapState, mapActions } from 'pinia';
 import { cartStore } from '../../stores/counter'
+import { login } from '../../utils/token/getToken';
 
 export default {
   data() {
@@ -19,8 +20,22 @@ export default {
   computed: {
     ...mapState(cartStore, ['productList', 'deliveryFee', 'calcTotal']),
   },
-  mounted() {
-    console.log("#router", this.$route.params.id)
+  async mounted() {
+    // 從 cookie 取出 token
+    const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));
+    const token = tokenCookie ? tokenCookie.split('=')[1] : null;
+
+    if (!token) {
+      // 登入
+      await login();
+    }
+
+    // 登入後依然沒 token 就踢出去
+    if (!token) {
+      this.$router.push("/");
+    } else {
+      this.token = token;
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@ import { mapState, mapActions } from 'pinia';
 import { cartStore } from '../../stores/counter';
 import axios from 'axios';
 
-import { getTokenFromCookie } from '../../utils/token/getToken'
+import { login } from '../../utils/token/getToken'
 
 export default {
   data() {
@@ -55,22 +55,26 @@ export default {
   components: {
     RouterLink
   },
-  mounted() {
-    console.log("#router", this.$route.params.id)
+  async mounted() {
 
-    // console.warn(getTokenFromCookie());
+    console.log("#router", this.$route.params.id);
 
     // 從 cookie 取出 token
     const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));
     const token = tokenCookie ? tokenCookie.split('=')[1] : null;
 
+    if (!token) {
+      // 登入
+      await login();
+    }
 
-    // 沒 token 就踢出去
+    // 登入後依然沒 token 就踢出去
     if (!token) {
       this.$router.push("/");
     } else {
       this.token = token;
     }
+
     // 取得所有產品列表
     this.getProducts();
   }
@@ -97,7 +101,7 @@ export default {
             <div class="pt-2">內含：{{ item.description }}</div>
             <div class="py-2 fs-5">NT${{ item.price }}</div>
             <template v-if="hasProduct(item.id)">
-              <button type="button" class="btn btn-secondary w-100 px-1" disabled>已加入購物車</button>
+              <button type="button" class="btn btn-secondary w-100 px-1" disabled>已在購物車</button>
             </template>
             <template v-else>
               <button type="button" class="btn btn-primary w-100 px-1" @click="addToCart(item)">加入購物車</button>

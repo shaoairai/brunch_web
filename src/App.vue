@@ -31,7 +31,7 @@ export default {
   <!-- 導覽列 -->
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container">
-      <RouterLink to="/home"><span class="navbar-brand text-white">吃迷 CHIC MI</span></RouterLink>
+      <RouterLink to="/"><span class="navbar-brand text-white">吃迷 CHIC MI</span></RouterLink>
       <!-- <a class="navbar-brand text-white" href="#">吃迷 CHIC MI</a> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
