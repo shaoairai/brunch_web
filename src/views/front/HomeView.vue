@@ -5,6 +5,7 @@ import { mapActions, mapState } from "pinia";
 import { cartStore } from "../../stores/counter";
 import { RouterLink } from "vue-router";
 import { login } from "../../utils/token/getToken";
+import { gsap } from 'gsap';
 
 export default {
   data() {
@@ -62,6 +63,17 @@ export default {
   },
   async mounted() {
 
+    // const quote = document.querySelector(".box");
+    // quote.innerHTML = `<span class="char">${quote.innerHTML.split("").join('</span><span class="char">')}</span>`;
+
+    // const tl = gsap.timeline();
+    // tl.from(".char", {
+    //   opacity: 0,
+    //   yPercent: 100,
+    //   stagger: 0.1, // 每個字元之間動畫間隔(同動畫時使用，不須forEach)
+    //   duration: 1, // 該字元的動畫時長
+    // })
+
     // 從 cookie 取出 token
     const tokenCookie = document.cookie
       .split(";")
@@ -87,6 +99,7 @@ export default {
 </script>
 
 <template>
+  <div class="box">吃迷跳動起來</div>
   <div class="content position-relative">
     <!-- banner 背景 -->
     <section class="banner-outer">
@@ -245,6 +258,16 @@ export default {
   background-attachment: fixed;
   filter: brightness(0.2);
 }
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: lightgrey;
+  position: absolute;
+  left: 0px;
+  z-index: 10000;
+}
+
 
 @media screen and (max-width: 768px) {
 
