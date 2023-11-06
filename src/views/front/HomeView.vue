@@ -5,7 +5,7 @@ import { mapActions, mapState } from "pinia";
 import { cartStore } from "../../stores/counter";
 import { RouterLink } from "vue-router";
 import { login } from "../../utils/token/getToken";
-import { gsap } from 'gsap';
+// import { gsap } from 'gsap';
 
 export default {
   data() {
@@ -63,17 +63,6 @@ export default {
   },
   async mounted() {
 
-    // const quote = document.querySelector(".box");
-    // quote.innerHTML = `<span class="char">${quote.innerHTML.split("").join('</span><span class="char">')}</span>`;
-
-    // const tl = gsap.timeline();
-    // tl.from(".char", {
-    //   opacity: 0,
-    //   yPercent: 100,
-    //   stagger: 0.1, // 每個字元之間動畫間隔(同動畫時使用，不須forEach)
-    //   duration: 1, // 該字元的動畫時長
-    // })
-
     // 從 cookie 取出 token
     const tokenCookie = document.cookie
       .split(";")
@@ -99,7 +88,6 @@ export default {
 </script>
 
 <template>
-  <div class="box">吃迷跳動起來</div>
   <div class="content position-relative">
     <!-- banner 背景 -->
     <section class="banner-outer">
@@ -115,7 +103,7 @@ export default {
     </section>
     <!-- 關於 -->
     <section>
-      <div class="py-5">
+      <div class="py-5 marble-bg">
         <div class="container">
           <div class="row py-5 flex-column flex-md-row">
             <div class="col d-flex flex-column justify-content-center">
@@ -154,13 +142,13 @@ export default {
       </div>
     </section>
     <!-- 精選熱銷 -->
-    <section>
+    <section class="table-runner">
       <div class="py-5 container">
         <h3 class="text-start py-5 text-center">精選熱銷 | Featured</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <template v-for="(item, key, index) in products" :key="item.id">
             <div class="col" v-if="index > 0 && index < 7">
-              <div class="card h-100 border-0">
+              <div class="card h-100 border-0" style="background: unset;">
                 <img :src="item.imageUrl" class="rounded-3" alt="..." style="height: 300px; object-fit: cover;" />
                 <div class="d-flex justify-content-between pt-2">
                   <h5>{{ item.title }}</h5>
@@ -232,6 +220,19 @@ export default {
   height: calc(100vh - 66px);
 }
 
+.marble-bg {
+  background: url("/src/assets/img/marble.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.table-runner {
+  background: url("/src/assets/img/table-runner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 /* 正圓遮罩 */
 .circle-mask {
@@ -257,15 +258,6 @@ export default {
   background-size: cover;
   background-attachment: fixed;
   filter: brightness(0.2);
-}
-
-.box {
-  width: 100px;
-  height: 100px;
-  background-color: lightgrey;
-  position: absolute;
-  left: 0px;
-  z-index: 10000;
 }
 
 
