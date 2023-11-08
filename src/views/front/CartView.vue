@@ -8,9 +8,19 @@ export default {
   data() {
     return {
       text: "Products頁",
+      token: "",
     }
   },
   methods: {
+    takeToken() {
+      // 從 cookie 取出 token
+      const tokenCookie = document.cookie
+        .split(";")
+        .map((cookie) => cookie.trim())
+        .find((cookie) => cookie.startsWith("token="));
+      const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+      return token;
+    },
     // 該產品+1
     ...mapActions(cartStore, ['plusProduct', 'minusProduct', 'delProduct']),
   },
@@ -21,20 +31,16 @@ export default {
     ...mapState(cartStore, ['productList', 'deliveryFee', 'calcTotal']),
   },
   async mounted() {
-    // 從 cookie 取出 token
-    const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));
-    const token = tokenCookie ? tokenCookie.split('=')[1] : null;
+    let takenToken = this.takeToken();
+    this.token = takenToken;
 
-    if (!token) {
+    // 沒 token 就踢出去
+    if (!takenToken) {
       // 登入
       await login();
-    }
 
-    // 登入後依然沒 token 就踢出去
-    if (!token) {
-      this.$router.push("/");
-    } else {
-      this.token = token;
+      takenToken = this.takeToken();
+      this.token = takenToken;
     }
   }
 }

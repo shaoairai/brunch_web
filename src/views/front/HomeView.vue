@@ -16,8 +16,18 @@ export default {
     };
   },
   methods: {
+    takeToken() {
+      // 從 cookie 取出 token
+      const tokenCookie = document.cookie
+        .split(";")
+        .map((cookie) => cookie.trim())
+        .find((cookie) => cookie.startsWith("token="));
+      const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+      return token;
+    },
     // 取得產品列表
     getProducts() {
+      console.log("取得產品列表");
       const conf = {
         method: "GET",
         url: `${import.meta.env.VITE_APP_URL}v2/api/${import.meta.env.VITE_APP_PATH
@@ -63,23 +73,19 @@ export default {
   },
   async mounted() {
 
-    // 從 cookie 取出 token
-    const tokenCookie = document.cookie
-      .split(";")
-      .map((cookie) => cookie.trim())
-      .find((cookie) => cookie.startsWith("token="));
-    const token = tokenCookie ? tokenCookie.split("=")[1] : null;
-
-    if (!token) {
-      // 登入
-      await login();
-    }
+    let takenToken = this.takeToken();
+    this.token = takenToken;
 
     // 沒 token 就踢出去
-    if (!token) {
-      this.$router.push("/");
-    } else {
-      this.token = token;
+    if (!takenToken) {
+      // console.log("開始登入");
+      // 登入
+      await login();
+      // console.log("完成登入");
+
+      takenToken = this.takeToken();
+      this.token = takenToken;
+
     }
 
     this.getProducts();

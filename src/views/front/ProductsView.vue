@@ -19,6 +19,15 @@ export default {
     RouterLink
   },
   methods: {
+    takeToken() {
+      // 從 cookie 取出 token
+      const tokenCookie = document.cookie
+        .split(";")
+        .map((cookie) => cookie.trim())
+        .find((cookie) => cookie.startsWith("token="));
+      const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+      return token;
+    },
     // 取得產品列表
     getProducts() {
       const conf = {
@@ -92,20 +101,16 @@ export default {
   },
   async mounted() {
 
-    // 從 cookie 取出 token
-    const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));
-    const token = tokenCookie ? tokenCookie.split('=')[1] : null;
-
-    if (!token) {
-      // 登入
-      await login();
-    }
+    let takenToken = this.takeToken();
+    this.token = takenToken;
 
     // 沒 token 就踢出去
-    if (!token) {
-      this.$router.push("/");
-    } else {
-      this.token = token;
+    if (!takenToken) {
+      // 登入
+      await login();
+
+      takenToken = this.takeToken();
+      this.token = takenToken;
     }
 
     this.getProducts();

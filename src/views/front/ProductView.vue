@@ -9,13 +9,23 @@ import { login } from '../../utils/token/getToken'
 export default {
   data() {
     return {
-      text: "Products頁"
+      text: "Products頁",
+      token: "",
     }
   },
   computed: {
     ...mapState(cartStore, ['products', 'productList'])
   },
   methods: {
+    takeToken() {
+      // 從 cookie 取出 token
+      const tokenCookie = document.cookie
+        .split(";")
+        .map((cookie) => cookie.trim())
+        .find((cookie) => cookie.startsWith("token="));
+      const token = tokenCookie ? tokenCookie.split("=")[1] : null;
+      return token;
+    },
     // 取得產品列表
     getProducts() {
       const conf = {
@@ -59,20 +69,16 @@ export default {
 
     console.log("#router", this.$route.params.id);
 
-    // 從 cookie 取出 token
-    const tokenCookie = document.cookie.split(';').map(cookie => cookie.trim()).find(cookie => cookie.startsWith('token='));
-    const token = tokenCookie ? tokenCookie.split('=')[1] : null;
+    let takenToken = this.takeToken();
+    this.token = takenToken;
 
-    if (!token) {
+    // 沒 token 就踢出去
+    if (!takenToken) {
       // 登入
       await login();
-    }
 
-    // 登入後依然沒 token 就踢出去
-    if (!token) {
-      this.$router.push("/");
-    } else {
-      this.token = token;
+      takenToken = this.takeToken();
+      this.token = takenToken;
     }
 
     // 取得所有產品列表
